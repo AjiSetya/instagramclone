@@ -21,7 +21,7 @@
     <string name="pass">Password</string>
     <string name="help_signin">Forgot your login details? Get help signing in</string>
     <string name="register_help">Don\'t have an account? Sign Up</string>
-    <string name="name">Name</string>
+    <string name="username">Username</string>
     <string name="register">Signup</string>
     <string name="login_help">Already have an account? Log In</string>
 </resources>

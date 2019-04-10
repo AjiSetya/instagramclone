@@ -3,10 +3,6 @@ package com.blogspot.blogsetyaaji.istagramclone;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +13,9 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +23,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 
 /**
@@ -40,8 +39,7 @@ public class AddFragment extends Fragment {
         // Required empty public constructor
     }
 
-    TextInputEditText inGambar, inCaption, inUser;
-    Button btnSimpan;
+    private TextInputEditText inGambar, inCaption, inUser;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -57,14 +55,9 @@ public class AddFragment extends Fragment {
         inCaption = view.findViewById(R.id.incaption);
         inGambar = view.findViewById(R.id.ingambar);
         inUser = view.findViewById(R.id.inuser);
-        btnSimpan = view.findViewById(R.id.btnsimpan);
+        Button btnSimpan = view.findViewById(R.id.btnsimpan);
 
-        btnSimpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertData();
-            }
-        });
+        btnSimpan.setOnClickListener(view1 -> insertData());
     }
 
     private void insertData() {
@@ -83,35 +76,29 @@ public class AddFragment extends Fragment {
             progressDialog.show();
 
             StringRequest jsonObjectRequest =  new StringRequest(Request.Method.POST, URL,
-                    new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
-                    Log.d("log", "onResponse: " + response);
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String hasil = jsonObject.getString("hasil");
-                        String pesan = jsonObject.getString("pesan");
-                        if (hasil.equalsIgnoreCase("true")) {
-                            Toast.makeText(getActivity(), pesan, Toast.LENGTH_LONG).show();
+                    response -> {
+                        progressDialog.dismiss();
+                        Log.d("log", "onResponse: " + response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String hasil = jsonObject.getString("hasil");
+                            String pesan = jsonObject.getString("pesan");
+                            if (hasil.equalsIgnoreCase("true")) {
+                                Toast.makeText(getActivity(), pesan, Toast.LENGTH_LONG).show();
 
-                            ((MainActivity) Objects.requireNonNull(getActivity())).openFragment(new HomeFragment());
-                        } else {
-                            Toast.makeText(getActivity(), pesan, Toast.LENGTH_LONG).show();
+                                ((MainActivity) Objects.requireNonNull(getActivity())).openFragment(new HomeFragment());
+                            } else {
+                                Toast.makeText(getActivity(), pesan, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("log", "onResponse: " + e.getMessage());
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.e("log", "onResponse: " + e.getMessage());
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_LONG).show();
-                    Log.e("log", "onErrorResponse: " + error.getMessage() );
-                }
-            }) {
+                    }, error -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_LONG).show();
+                        Log.e("log", "onErrorResponse: " + error.getMessage() );
+                    }) {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> parameter = new HashMap<>();

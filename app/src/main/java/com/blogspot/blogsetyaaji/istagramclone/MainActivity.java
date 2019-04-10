@@ -1,33 +1,29 @@
 package com.blogspot.blogsetyaaji.istagramclone;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    openFragment(new HomeFragment());
-                    return true;
-                case R.id.navigation_add:
-                    openFragment(new AddFragment());
-                    return true;
-                case R.id.navigation_profile:
-                    openFragment(new ProfileFragment());
-                    return true;
-            }
-            return false;
-        }
-    };
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        openFragment(new HomeFragment());
+                        return true;
+                    case R.id.navigation_add:
+                        openFragment(new AddFragment());
+                        return true;
+                    case R.id.navigation_profile:
+                        openFragment(new ProfileFragment());
+                        return true;
+                }
+                return false;
+            };
 
     public void openFragment(Fragment fragment) {
         getSupportFragmentManager()

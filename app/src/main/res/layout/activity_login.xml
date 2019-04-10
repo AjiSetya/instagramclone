@@ -29,47 +29,51 @@
         android:paddingLeft="@dimen/jarak_parent_login"
         android:paddingRight="@dimen/jarak_parent_login">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtemaillogin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/objek_jarak"
-            android:textColorHint="@color/bg_txt_login"
-            app:boxBackgroundColor="@color/bg_box_login"
-            app:boxBackgroundMode="outline">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textSize="14sp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/txtpasslogin"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/objek_jarak"
             android:textColorHint="@color/bg_txt_login"
             app:boxBackgroundColor="@color/bg_box_login"
             app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@android:color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtemaillogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/objek_jarak"
+            android:textColorHint="@color/bg_txt_login"
+            app:boxBackgroundColor="@color/bg_box_login"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@android:color/white"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/bg_txt_login">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtpasslogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/pass"
                 android:inputType="textPassword"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@android:color/white"
                 android:textSize="14sp" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.button.MaterialButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnlogin"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"

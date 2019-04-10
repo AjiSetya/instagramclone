@@ -104,18 +104,19 @@
 
         </LinearLayout>
 
-        <android.support.design.button.MaterialButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btneditprofile"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="@string/edit_profile"
             android:textAllCaps="false"
+            android:textColor="@android:color/black"
             android:textSize="15sp"
             app:backgroundTint="@color/transparent"
             app:cornerRadius="8dp"
             app:rippleColor="#33AAAAAA"
-            android:layout_weight="1"
             app:strokeColor="@android:color/darker_gray"
             app:strokeWidth="2dp" />
     </LinearLayout>

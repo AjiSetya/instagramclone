@@ -24,4 +24,5 @@
     <string name="username">Username</string>
     <string name="register">Signup</string>
     <string name="login_help">Already have an account? Log In</string>
+    <string name="logout">SignOut</string>
 </resources>

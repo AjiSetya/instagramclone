@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.blogsetyaaji.istagramclone.activity.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -68,7 +69,7 @@ public class AddFragment extends Fragment {
             inUser.setError("User harus diisi");
             inUser.requestFocus();
         } else {
-            String URL = "https://ajisetyaserver.000webhostapp.com/SMPIDN/webdatabase/api_simpanpost.php";
+            String URL = "http://192.168.70.168/ajisetyaserver/webdatabase/ig_clone/api_simpanpost.php";
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setTitle("Menyimpan data");

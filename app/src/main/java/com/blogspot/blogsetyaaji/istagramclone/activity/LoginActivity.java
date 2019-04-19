@@ -1,4 +1,4 @@
-package com.blogspot.blogsetyaaji.istagramclone;
+package com.blogspot.blogsetyaaji.istagramclone.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,9 +14,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.blogsetyaaji.istagramclone.Constants;
+import com.blogspot.blogsetyaaji.istagramclone.R;
+import com.blogspot.blogsetyaaji.istagramclone.SessionManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,11 +48,15 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.parentrootlogin)
     RelativeLayout parentrootlogin;
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        sessionManager = new SessionManager(LoginActivity.this);
 
         // onCreate
         animationDrawable = (AnimationDrawable) parentrootlogin.getBackground();
@@ -78,14 +86,15 @@ public class LoginActivity extends AppCompatActivity {
             txtpasslogin.setError("Password harus diisi");
             txtpasslogin.requestFocus();
         } else {
-            String URL = "https://ajisetyaserver.000webhostapp.com/SMPIDN/webdatabase/api_loginuser.php";
 
             final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
             progressDialog.setTitle("Memproses");
             progressDialog.setMessage("Tunggu sebentar ...");
+            progressDialog.setCancelable(false);
             progressDialog.show();
 
-            StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, URL,
+            StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                    Constants.BASEURL + "api_loginuser.php",
                     response -> {
                         progressDialog.dismiss();
                         Log.d("log", "onResponse: " + response);
@@ -94,6 +103,17 @@ public class LoginActivity extends AppCompatActivity {
                             String hasil = jsonObject.getString("hasil");
                             String pesan = jsonObject.getString("pesan");
                             if (hasil.equalsIgnoreCase("true")) {
+                                JSONArray arrayPost = jsonObject.getJSONArray("user");
+                                for (int a = 0; a < arrayPost.length(); a++) {
+                                    // mengambil tiap objek pada masing2 item sesuai urutannya
+                                    JSONObject objectPost = arrayPost.getJSONObject(a);
+                                    HashMap<String, String> map = new HashMap<>();
+                                    // memasukkan objek ke dalam hashmap dengan memanggil key api
+                                    map.put("iduser", objectPost.getString("id_user"));
+                                    map.put("emailuser", objectPost.getString("email"));
+                                    sessionManager.createSession(map.get("emailuser"), map.get("iduser"));
+                                }
+
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             } else {
@@ -104,10 +124,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("log", "onResponse: " + e.getMessage());
                         }
                     }, error -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Terjadi kesalahan, coba lagi", Toast.LENGTH_LONG).show();
-                        Log.e("log", "onErrorResponse: " + error.getMessage());
-                    }) {
+                progressDialog.dismiss();
+                Toast.makeText(LoginActivity.this, "Terjadi kesalahan, coba lagi", Toast.LENGTH_LONG).show();
+                Log.e("log", "onErrorResponse: " + error.getMessage());
+            }) {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> parameter = new HashMap<>();
@@ -121,5 +141,11 @@ public class LoginActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(LoginActivity.this));
             requestQueue.add(jsonObjectRequest);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

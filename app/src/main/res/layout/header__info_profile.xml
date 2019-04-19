@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/pp_profile"
@@ -13,22 +13,22 @@
         android:layout_marginTop="@dimen/objek_jarak"
         android:layout_marginEnd="@dimen/objek_jarak"
         android:layout_marginBottom="@dimen/objek_jarak"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/pp_profile"
+        android:layout_marginStart="@dimen/objek_jarak"
         android:layout_toEndOf="@id/pp_profile"
-        android:orientation="vertical"
-        android:layout_marginStart="@dimen/objek_jarak">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/parent1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"

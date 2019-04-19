@@ -1,4 +1,4 @@
-package com.blogspot.blogsetyaaji.istagramclone;
+package com.blogspot.blogsetyaaji.istagramclone.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.blogsetyaaji.istagramclone.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -93,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             txtpassreg.setError("Password harus diisi");
             txtpassreg.requestFocus();
         } else {
-            String URL = "https://ajisetyaserver.000webhostapp.com/SMPIDN/webdatabase/api_registeruser.php";
+            String URL = "http://192.168.70.168/ajisetyaserver/webdatabase/ig_clone/api_registeruser.php";
 
             final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
             progressDialog.setTitle("Memproses data");

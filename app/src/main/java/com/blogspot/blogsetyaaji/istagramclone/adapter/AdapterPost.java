@@ -1,4 +1,4 @@
-package com.blogspot.blogsetyaaji.istagramclone;
+package com.blogspot.blogsetyaaji.istagramclone.adapter;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -11,19 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.blogsetyaaji.istagramclone.Constants;
+import com.blogspot.blogsetyaaji.istagramclone.R;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostHolder> implements View.OnClickListener {
+public class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostHolder> implements View.OnClickListener {
 
     // deklarasi variable data dari home fragment
     private ArrayList<HashMap<String, String>> listData;
     private Context context;
 
     // penangkap data dari home fragment
-    AdapterPost(FragmentActivity activity, ArrayList<HashMap<String, String>> listPost) {
+    public AdapterPost(FragmentActivity activity, ArrayList<HashMap<String, String>> listPost) {
         // data dari home fragment di masukkan ke dalam variable adapter
         listData = listPost;
         context = activity;
@@ -44,7 +46,7 @@ class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostHolder> implement
         postHolder.txtUserName.setText(listData.get(i).get("username"));
         postHolder.txtUserNameCap.setText(listData.get(i).get("username"));
         postHolder.txtCaption.setText(listData.get(i).get("caption"));
-        String URL_GAMBAR = "https://ajisetyaserver.000webhostapp.com/SMPIDN/webdatabase/img/";
+        String URL_GAMBAR = Constants.BASEURL + "gambar/";
         Glide.with(context)
                 .load(URL_GAMBAR + listData.get(i).get("gambar"))
                 .into(postHolder.imgPost);

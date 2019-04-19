@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentrootregsiter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/parentrootregsiter"
     android:background="@drawable/anim_bg_list"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/pp_profile"
         android:layout_width="@dimen/pp_register"
         android:layout_height="@dimen/pp_register"
-        android:src="@drawable/ic_person_white"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/parent1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:src="@drawable/ic_person_white"
         app:civ_border_color="@android:color/white"
-        app:civ_border_width="@dimen/border_register"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        app:civ_border_width="@dimen/border_register" />
 
     <LinearLayout
         android:id="@+id/parent1"

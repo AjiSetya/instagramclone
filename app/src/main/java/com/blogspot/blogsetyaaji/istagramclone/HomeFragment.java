@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.blogsetyaaji.istagramclone.adapter.AdapterPost;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +73,7 @@ public class HomeFragment extends Fragment {
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         // api data
-        String URL = "https://ajisetyaserver.000webhostapp.com/SMPIDN/webdatabase/api_tampilpost.php";
+        String URL = Constants.BASEURL + "api_tampilpost.php";
         // membuat request mengambil data
         JsonObjectRequest requestPost = new JsonObjectRequest(Request.Method.GET, URL, null,
                 response -> {
